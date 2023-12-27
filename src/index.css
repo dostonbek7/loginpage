@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
+/* @font-face {
   font-display: swap;
   font-family: 'Karla';
   font-style: normal;
@@ -16,9 +16,12 @@
   font-style: normal;
   font-weight: 700;
   src: url('./fonts/karla-v31-latin-700.woff2') format('woff2');
-}
+} */
 
 @layer components{
+  *:focus{
+    @apply outline-4 outline-dotted outline-cyan-400
+  }
   .max-container{
     width: 100%;
     max-width: 1200px;
@@ -28,5 +31,50 @@
   }
   html, body, #root{
     @apply h-full
+  }
+  #root{
+    @apply flex flex-col
+  }
+  main{
+    @apply grow dark:bg-slate-700
+  }
+  .animation{
+    @apply transition duration-300
+  }
+  .form-label{
+    @apply block
+  }
+  .form-label span{
+    @apply block mb-2 font-semibold text-black
+  }
+  .form-label input{
+    @apply border-2 border-solid border-green-300 px-1 py-2 rounded-md w-full
+  }
+  .loader {
+    width: 20px;
+    aspect-ratio: 1;
+    display: grid;
+    border-radius: 50%;
+    background:
+      linear-gradient(0deg ,rgba(250, 249, 249, 0.5) 30%,#ebe3e300 0 70%,rgb(240, 236, 236) 0) 50%/8% 100%,
+      linear-gradient(90deg,rgba(237, 234, 234, 0.25) 30%,#f3ebeb00 0 70%,rgba(242, 237, 237, 0.75) 0) 50%/100% 8%;
+    background-repeat: no-repeat;
+    animation: l23 1s infinite steps(12);
+  }
+  .loader::before,
+  .loader::after {
+     content: "";
+     grid-area: 1/1;
+     border-radius: 50%;
+     background: inherit;
+     opacity: 0.915;
+     transform: rotate(30deg);
+  }
+  .loader::after {
+     opacity: 0.83;
+     transform: rotate(60deg);
+  }
+  @keyframes l23 {
+    100% {transform: rotate(1turn)}
   }
 }

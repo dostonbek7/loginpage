@@ -2,10 +2,10 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="absolute w-full bottom-0 bg-neutral-500 py-3">
-      <h2 className="text-center dark:text-white text-white">All Right Reserved. 2023</h2>
-    </div>
-  );
+    <footer className=" fixed bottom-0 left-0 right-0 z-30 bg-neutral-500 py-4 text-center font-medium">
+      <p>All Right Reserved. {new Date().getFullYear()}</p>
+    </footer>
+  )
 }
 
 export default Footer;

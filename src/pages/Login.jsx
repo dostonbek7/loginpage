@@ -1,46 +1,82 @@
-import React from "react";
+import bgVideo from "../video/knife.mp4";
+import { useLogin } from "../hooks/useLogin";
+import { useRef } from "react";
+//spinner
+import Loader from "../components/Loader";
+//react-icons
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
+  const { login, isPending, enterWithGoogle } = useLogin();
+  const password = useRef();
+  const email = useRef();
+  const form = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(email.current.value, password.current.value);
+
+    form.current.reset();
+  };
+  const handleWithGoogle = (e) => {
+    e.preventDefault();
+    enterWithGoogle();
+  };
+
   return (
-    <div className="py-5">
-    <form className="max-w-sm mx-auto">
-      <div className="mb-5">
-        <label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Your email
-        </label>
-        <input
-          type="email"
-          id="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="name@gmail.com"
-          required
-        />
+    <>
+      <div className="h-screen relative">
+        <video
+          className="absolute h-screen w-screen object-cover z-[-1]"
+          muted
+          autoPlay
+          loop
+          src={bgVideo}
+        ></video>
+        <div className="grid place-items-center w-full h-screen bg-black bg-opacity-20">
+          <div className="bg-white p-8 bg-opacity-60 rounded-md max-w-md w-full">
+            <h1 className="text-4xl mb-4 text-center text-black">Login</h1>
+            <form
+              ref={form}
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-5"
+            >
+              <label className="form-label">
+                <span>Your email</span>
+                <input
+                  ref={email}
+                  type="email"
+                  placeholder="Enter your email"
+                />
+              </label>
+              <label className="form-label">
+                <span>Your password</span>
+                <input
+                  ref={password}
+                  type="password"
+                  placeholder="Enter your password"
+                />
+              </label>
+              <button className="flex items-center justify-center text-white btn bg-emerald-600 py-2 px-3 rounded-md text-lg">
+                {isPending ? <Loader /> : "Login"}
+              </button>
+              <button
+                onClick={handleWithGoogle}
+                className="flex items-center gap-2 justify-center btn bg-emerald-900 py-2 px-3 rounded-md text-lg text-white"
+              >
+                <FcGoogle className="text-2xl" /> Enter with Google
+              </button>
+              <p className="text-center text-base">
+                Don't have an account?
+                <a className="text-lime-700 ml-2" href="/signup">
+                  Signup
+                </a>
+              </p>
+            </form>
+          </div>
+        </div>
       </div>
-      <div className="mb-5">
-        <label
-          htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Your password
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Login
-      </button>
-    </form>
-    </div>
+    </>
   );
 }
 
