@@ -11,6 +11,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 import Home from "./pages/Home";
 import Recipe from "./pages/Recipe";
+import Create from "./pages/Create";
 
 function App() {
   const { user, isAuthReady, dispatch } = useGlobalContext();
@@ -30,6 +31,10 @@ function App() {
         {
           path:'recipe/:id',
           element: <Recipe/>,
+        },
+        {
+          path:'create',
+          element: <Create/>,
         },
       ]
     },

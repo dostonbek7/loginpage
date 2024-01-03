@@ -5,26 +5,41 @@ function RecipesList({ recipies }) {
     <div className="max-container">
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 py-5">
         {recipies.map((recipie) => {
-          const { id, title, cookingTime, method, time, ingredient, images } =
+          const { id, title, cookingTime, method, time, ingredients, images } =
             recipie;
           return (
-            <li key={id} className="max-w-[500px] md:max-w-[340px] lg:max-w-[350px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <img className="rounded-t-lg" src={images[0]} alt="" />
+            <li
+              key={id}
+              className="max-w-[500px] md:min-w-[340px] lg:min-w-[350px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <img className="rounded-t-lg" src={images[0]} alt="" />
               <div className="p-5">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                   Title: <span className="font-medium">{title}</span>
-                  </h5>
+                </h5>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-2">
-                  <span className="font-bold text-black">Method: </span>{method}
+                  <span className="font-bold dark:text-white text-black">
+                    Method:{" "}
+                  </span>
+                  {method}
                 </p>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-2">
-                  <span className="font-bold text-black">Ingredients: </span>{ingredient.join(',')}
+                  <span className="font-bold dark:text-white text-black mr-1">
+                    Ingredients:
+                  </span>
+                  {ingredients.join(',')}
                 </p>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-2">
-                  <span className="font-bold text-black">Cooking time: </span>{cookingTime}
+                  <span className="font-bold dark:text-white text-black">
+                    Cooking time:{" "}
+                  </span>
+                  {cookingTime}
                 </p>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-2">
-                  <span className="font-bold text-black">Time: </span>{time}
+                  <span className="font-bold dark:text-white text-black">
+                    Time:{" "}
+                  </span>
+                  {time}
                 </p>
                 <Link
                   to={`recipe/${id}`}

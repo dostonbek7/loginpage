@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import useLogout from "../hooks/useLogout";
 import { FaMoon } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loader from "./Loader";
 
+function setLocalStorage() {
+  return localStorage.getItem("mode") || "light";
+}
+
 function Navbar() {
   const { user } = useGlobalContext();
   const { logout, isPending } = useLogout();
+
+  useEffect(() => {
+    document.body.classList.add(setLocalStorage());
+  }, []);
+
   const handleTheme = () => {
-    document.body.classList.toggle("dark")
+    document.body.classList.toggle("dark");
+    localStorage.setItem(
+      "mode",
+      setLocalStorage() === "dark" ? "light" : "dark",
+    );
   };
 
   return (
@@ -28,10 +41,10 @@ function Navbar() {
               onClick={logout}
               className="px-2 py-1 md:px-4 md:py-2 border rounded-md bg-orange-400 animation hover:bg-orange-700 text-white"
             >
-              {isPending ? <Loader/> : 'Logout'}
+              {isPending ? <Loader /> : "Logout"}
             </button>
             <Link
-              to="signup"
+              to="create"
               className="px-2 py-1 md:px-4 md:py-2 border rounded-md bg-green-600 animation hover:bg-green-800 text-white"
             >
               Create

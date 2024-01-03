@@ -1,13 +1,15 @@
 import useCollection from "../hooks/useCollection";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import RecipiesList from "../pages/RecipesList";
 import { Watch } from 'react-loader-spinner'
 
 
 function Home() {
-  const { documents: recipies, isPending } = useCollection("foods");
+  const { user }= useGlobalContext()
+  const { documents: recipies, isPending } = useCollection("foods", ['userId', '==', user.uid]);
 
   return (
-    <div>
+    <div className="h-screen">
       <div className="z-10 center-loader">
         {isPending &&
         (<Watch

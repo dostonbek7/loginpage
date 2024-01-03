@@ -7,7 +7,7 @@ function MainLayout() {
   return (
     <div className='relative'>
       <Navbar/>
-      <main className='h-full'>
+      <main className='h-full dark:bg-slate-800'>
         <Outlet/>
       </main>
       <Footer/>
